@@ -355,8 +355,6 @@ class FirstPersonCameraDemo {
     wall4.receiveShadow = true;
     this.scene_.add(wall4);
 
-    // Create Box3 for each mesh in the scene so that we can
-    // do some easy intersection tests.
     const meshes = [
       plane, box, wall1, wall2, wall3, wall4];
 
