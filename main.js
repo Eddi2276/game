@@ -1,8 +1,10 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.136';
-
+import {GLTFLoader} from 'https://cdn.skypack.dev/three@0.118/examples/jsm/loaders/GLTFLoader.js';
 import {FirstPersonControls} from 'https://cdn.skypack.dev/three@0.136/examples/jsm/controls/FirstPersonControls.js';
 
 
+
+//
 
 const KEYS = {
   'a': 65,
@@ -277,7 +279,7 @@ class FirstPersonCameraDemo {
   }
 
 
-  //Alternsativ Space texture
+  //Alternsativ cube texture
   initializeScene_() {
     const loader = new THREE.CubeTextureLoader();
     const texture = loader.load([
@@ -290,7 +292,10 @@ class FirstPersonCameraDemo {
   ]);
 
 
- 
+
+
+
+
 
 
     texture.encoding = THREE.sRGBEncoding;
@@ -305,6 +310,26 @@ class FirstPersonCameraDemo {
     checkerboard.repeat.set(128,128);
     checkerboard.encoding = THREE.sRGBEncoding;
 
+
+
+ var objloader = new THREE.OBJLoader();
+ objloader.load('model-5.obj', function(object){
+   object.scale.x=0.5;
+   object.scale.y=0.5;
+   object.scale.z=0.5;
+   object.position.x =0;
+ object.position.y =-1;
+ object.position.z =0;
+
+   scene.add(object);
+
+ });
+
+
+
+
+
+
     const plane = new THREE.Mesh(
         new THREE.PlaneGeometry(500, 500, 10, 10),
         new THREE.MeshStandardMaterial({map: checkerboard}));
@@ -316,7 +341,7 @@ class FirstPersonCameraDemo {
     const box = new THREE.Mesh(
       new THREE.BoxGeometry(4, 4, 4),
       this.loadMaterial_('vintage-tile1_', 0.2));
-    box.position.set(10, 2, 0);
+    box.position.set(10, 10, 0);
     box.castShadow = true;
     box.receiveShadow = true;
     this.scene_.add(box);
@@ -355,6 +380,7 @@ class FirstPersonCameraDemo {
     wall4.receiveShadow = true;
     this.scene_.add(wall4);
 
+  
     const meshes = [
       plane, box, wall1, wall2, wall3, wall4];
 
